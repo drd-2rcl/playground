@@ -2,7 +2,7 @@ defmodule Assoc.Payment do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Assoc.CreditCard
+  alias Assoc.{CreditCard, Transaction}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -10,7 +10,8 @@ defmodule Assoc.Payment do
   @required_fields [
     :amount,
     :installments,
-    :credit_card_id
+    :credit_card_id,
+    :transaction_id
   ]
 
   schema "payments" do
@@ -18,6 +19,7 @@ defmodule Assoc.Payment do
     field :installments, :string
 
     belongs_to :credit_cards, CreditCard, foreign_key: :credit_card_id
+    belongs_to :transactions, Transaction, foreign_key: :transaction_id
 
     timestamps()
   end

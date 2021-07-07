@@ -2,7 +2,7 @@ defmodule Assoc.Transaction do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Assoc.CreditCard
+  alias Assoc.{CreditCard, Payment}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -23,6 +23,7 @@ defmodule Assoc.Transaction do
     field :status, Ecto.Enum, values: @cct_status
 
     belongs_to :credit_cards, CreditCard, foreign_key: :credit_card_id
+    has_one :payments, Payment
 
     timestamps()
   end
